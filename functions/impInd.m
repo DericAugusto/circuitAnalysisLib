@@ -1,10 +1,11 @@
-function [result] = impInd( indutancia, w )
-%impInd( indutancia, w ) recebe como entrada o valor
-% de indutância do intutor e a frequência angular
-% da fonte e retorna o valor de impedância sobre aquele 
-% indutor.
+function [result] = impInd( indutancia, s )
+%impInd( indutancia, s ) recebe como entrada o valor
+% de indutância do intutor e "s", tal que:
+% (s = a + j*w), 
+% onde "w" é a a frequência angular (rd/s) da fonte
+% e "a" é a frequência Neperiana (Np/s) da fonte
+% A função retorna o valor de impedância sobre aquele indutor.
 
-result = (indutancia*w)*j;
+result = indutancia*s;
 
 end
-
