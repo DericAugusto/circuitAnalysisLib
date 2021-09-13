@@ -9,6 +9,16 @@ function [wc] = freqCorte(DEN,NUM)
 %   na qual o módulo da função de transferência |H(jw)| é:
 %       |H(jwc)| = |H(jw)|max / sqrt(2).
 %   
+%   Exemplo de uso: (Johnson, Cap. 15, Ex. 15.2, pg. 388)
+%   
+%   >> wc = freqCorte([2],[1,2,2])
+%
+%   wc =
+%
+%       1.4142
+%
+%   * Observe que a resposta exata é sqrt(2) ~ 1.4142!
+%
 %   Referências: 
 %   - Livros de circtuitos (Johnson, Sadiku)
 %   - Essa resposta no fórum da mathworks: 
@@ -23,8 +33,9 @@ dB3 = interp1(magr2, [wout phase mag], 0.5, 'spline');          % Find Frequency
 figure(1)
 title('Diagrama de Bode')
 subplot(2,1,1)
-wc = 20*log10(dB3(3));
-semilogx(wout, 20*log10(mag), '-b',  dB3(1), wc, '+r', 'MarkerSize',10)
+wc = dB3(1);
+Hwc = 20*log10(dB3(3));
+semilogx(wout, 20*log10(mag), '-b',  wc, Hwc, '+r', 'MarkerSize',10)
 l1 = ['|| H( j\cdot \omega_c) || ;  \omega_c \approx ',num2str(dB3(1))];
 legend(' || H( j\cdot \omega) || ',l1)
 grid on;
